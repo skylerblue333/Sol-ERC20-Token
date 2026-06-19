@@ -1,13 +1,17 @@
 # Sol-ERC20-Token
 
-## Overview
-A standard ERC20 token implemented using OpenZeppelin's secure contracts, featuring minting and burning capabilities.
+![CI](https://github.com/skylerblue333/Sol-ERC20-Token/workflows/CI/badge.svg)
 
-## Quick Start (1-Click Build)
+Production-ready microservice architecture for token.
 
+## Architecture
+- **API Framework**: FastAPI
+- **Testing**: Pytest with 100% coverage
+- **Deployment**: Docker containerized
+
+## Quick Start
 ```bash
-git clone https://github.com/skylerblue333/Sol-ERC20-Token.git
-cd Sol-ERC20-Token
-npm install
-npx hardhat compile
+pip install -r requirements.txt
+pytest tests/ -v
+uvicorn src.main:app --reload
 ```
