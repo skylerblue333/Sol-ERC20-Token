@@ -2,6 +2,7 @@
   "name": "skycoin4444-erc20-lab",
   "private": true,
   "version": "0.2.0",
+  "type": "module",
   "description": "Truthful ERC-20 engineering lab for SKYCOIN4444 integration experiments",
   "scripts": {
     "compile": "hardhat compile",
@@ -9,11 +10,11 @@
     "verify": "npm run compile && npm test && npm audit --audit-level=high"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-chai-matchers": "^2.0.8",
-    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "3.0.7",
     "@openzeppelin/contracts": "^5.4.0",
-    "chai": "^4.5.0",
-    "ethers": "^6.13.4",
-    "hardhat": "^2.22.17"
+    "hardhat": "3.14.0"
+  },
+  "overrides": {
+    "serialize-javascript": "7.1.0"
   }
 }
