@@ -1,14 +1,20 @@
 {
-  "name": "skycoin4444-token",
+  "name": "skycoin4444-erc20-lab",
   "private": true,
-  "version": "0.1.0",
-  "description": "SKYCOIN4444 ERC-20 contract foundation",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "Truthful ERC-20 engineering lab for SKYCOIN4444 integration experiments",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "verify": "npm run compile && npm test && npm audit --audit-level=high"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "3.0.7",
     "@openzeppelin/contracts": "^5.4.0",
-    "hardhat": "^2.19.0"
+    "hardhat": "3.14.0"
+  },
+  "overrides": {
+    "serialize-javascript": "7.1.0"
   }
 }

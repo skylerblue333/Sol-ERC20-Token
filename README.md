@@ -1,52 +1,58 @@
-# Sol-ERC20-Token
+# SKYCOIN4444 ERC-20 Engineering Lab
 
-Smart-contract/token component candidate for the SKYCOIN4444 ecosystem.
+A focused Solidity engineering lab for verifying a minimal fixed-supply ERC-20 contract and its integration boundary. It is **not** a live token launch, investment product, audited contract, or production deployment.
 
-## Current repository evidence
+## Implemented contract behavior
 
-- Public repository on `main`.
-- 14 tracked files were observed in the current audit snapshot.
-- JavaScript/Solidity signals are present.
-- `package.json` and GitHub Actions CI configuration are present.
-- No test-related filename was detected by the current audit.
+`SKYCOIN4444Token` uses OpenZeppelin ERC-20 primitives. The constructor accepts an initial supply expressed in base units, stores that value as `initialSupply`, and mints exactly that amount to the deployer. There is no public mint function, owner-only mint path, burn extension, upgrade proxy, tax/fee logic, blacklist, pause switch, staking system, sale contract, bridge, treasury mechanism, or deployment script in this repository.
 
-## Ecosystem role
+Token metadata in the lab contract is:
 
-**Protocol → Token / Smart Contract Integration**
+- name: `SKYCOIN4444`
+- symbol: `SKY4`
+- decimals: OpenZeppelin ERC-20 default (`18`)
 
-This repository may provide token-contract patterns or blockchain integration code for SKYCOIN4444. It must be evaluated against the canonical protocol, wallet, finance, and chain implementations before anything is promoted into the production platform.
+These values describe source code only. They do not establish a deployed asset or economic policy.
 
-## Truthful status
+## Verification
 
-- Source/configuration: **present**
-- Canonical protocol integration: **pending implementation and contract audit**
-- Automated tests: **not established by the current repository evidence**
-- Contract security audit: **not performed**
-- Production deployment: **not verified**
-- Live token contract: **not claimed**
+```bash
+npm install
+npm run compile
+npm test
+npm audit --audit-level=high
+```
 
-The previous README described the project as professional-grade and enterprise-ready without sufficient implementation or validation evidence. This README intentionally separates repository presence from production readiness.
+The test suite verifies initial supply, deployer allocation, standard transfers, approvals/`transferFrom`, and insufficient-balance rejection. GitHub Actions runs compile, tests, and a high-severity dependency audit on `main`, product branches, and pull requests.
 
-## Consolidation approach
+## Architecture
 
-Preserve the existing Solidity/JavaScript implementation and history. Compare it with Skycoin protocol/core, wallet, finance, and other token/contract repositories. Consolidate only verified contract behavior into the canonical protocol boundary.
+```text
+contracts/SKYCOIN4444Token.sol
+        |
+        +-- OpenZeppelin ERC20
+        |
+        +-- Hardhat compile/test boundary
+                 |
+                 +-- local ephemeral Hardhat network
+```
 
-For missing blockchain infrastructure, prefer mature public open-source foundations where appropriate, after checking license compatibility, security posture, maintenance status, and compatibility with the SKYCOIN4444 protocol. Do not copy code merely to make the repository larger.
+The product deliberately contains no deployment automation. Adding network deployment requires a separate reviewed change with explicit chain ID, signer/key-management strategy, deployment verification, address publication, and rollback/incident procedures.
 
-## Security requirements
+## SKYCOIN4444 integration boundary
 
-Before any production token deployment or integration:
+If the wider ecosystem eventually consumes this contract, applications should depend on a verified deployed address and ABI rather than copying contract source into each service. Wallet, finance, marketplace, and protocol components must treat token balances as external-chain state and must not infer deployment or value from this repository.
 
-- compile contracts with a reproducible toolchain
-- add meaningful unit/integration tests
-- test mint, burn, transfer, allowance, and authorization behavior as applicable
-- perform dependency and static analysis
-- perform an independent smart-contract security review/audit
-- document ownership/admin privileges and upgradeability
-- verify deployment addresses and network configuration
-- protect deployment keys and secrets
-- perform end-to-end integration tests against a controlled network
+## Status
+
+**Classification:** ENGINEERING LAB / beta contract component.
+
+Verified only when the current branch's CI is green. Independent smart-contract review, deployment validation, economic review, chain/network selection, key custody, monitoring, multisig/governance, and production integration remain pending.
+
+## Security boundaries
+
+Do not commit private keys, mnemonics, RPC secrets, deployment credentials, or signing material. No contract should be deployed with real economic value based solely on this repository's unit tests. An independent security review is required before any production use.
 
 ## License
 
-See the checked-in repository license and applicable third-party licenses.
+See `LICENSE` and applicable OpenZeppelin third-party licensing.
