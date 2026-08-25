@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+import { expect } from "chai";
+import { network } from "hardhat";
+
+const { ethers } = await network.connect();
 
 describe("SKYCOIN4444Token", function () {
   async function deployToken(amount = "4444") {
